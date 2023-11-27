@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProductosMAUI.ProductoPage"
+             Title="ProductoPage"
+             BackgroundColor="White">
+    <VerticalStackLayout>
+        <Frame BackgroundColor="Black" CornerRadius="0" Margin="0,0,0,0" HeightRequest="120" BorderColor="Transparent">
+            <HorizontalStackLayout HorizontalOptions="Center">
+            <Image
+                Source="dotnet_bot.png"      
+                HeightRequest="60"
+                WidthRequest="60"/>
+            <Label
+            Text="MAUI APPLICATION"
+            FontSize="25"
+            FontAttributes="Bold"
+            TextColor="White"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame BackgroundColor="White" Margin="10,10,10,0" BorderColor="Transparent">
+        
+            <Label 
+                Text="LISTA DE PRODUCTOS"
+                FontAttributes="Bold"
+                FontSize="32"
+                TextDecorations="Underline"
+                TextColor="Black"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+        </Frame>
+        
+        <ScrollView HeightRequest="450">
+            <ListView x:Name="listaProductos"
+                      RowHeight="80"
+                      Margin="0,30,0,0"
+                      ItemSelected="OnClickVerProducto">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Image
+                                    Source="dotnet_bot.png" 
+                                    HeightRequest="50"
+                                    WidthRequest="50"
+                                    HorizontalOptions="Center"
+                                    Margin="40,0,0,0"/>
+                                <StackLayout Orientation="Vertical" VerticalOptions="Center" Margin="40,0,0,0">
+                                    <Label
+                                        Text="{Binding Nombre}"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Start"
+                                        FontSize="20"
+                                        TextColor="Black"   />
+                                    <Label
+                                        Text="{Binding cantidad}"
+                                        VerticalOptions="End"
+                                        TextColor="Black"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+        <Button Margin="0,40,0,0" WidthRequest="200" HeightRequest="55" CornerRadius="20"
+            BackgroundColor="Black"
+            Text="Nuevo Producto"
+            HorizontalOptions="Center"
+            Clicked="OnClickNuevoProducto"
+            TextColor="White"
+            FontAttributes="Bold"/>  
+    </VerticalStackLayout>
+</ContentPage>
