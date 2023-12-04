@@ -1,4 +1,5 @@
 ﻿using ProductosMAUI.Models;
+using ProductosMAUI.Services;
 
 namespace ProductosMAUI;
 
@@ -6,10 +7,12 @@ public partial class VerProductoPage : ContentPage
 {
 
 	private Producto _producto;
+    private APIService _APIService;
 
-    public VerProductoPage()
+    public VerProductoPage(APIService apiservice)
 	{
 		InitializeComponent();
+        _APIService = apiservice;
 	}
 
     protected override void OnAppearing()
@@ -28,13 +31,15 @@ public partial class VerProductoPage : ContentPage
 
     private async void OnClickEliminar(object sender, EventArgs e)
     {
-        Utils.Util.ListaProductos.Remove(_producto);
+        await _APIService.DeleteProducto(_producto.IdProducto);
         await Navigation.PopModalAsync();
+        /*Utils.Util.ListaProductos.Remove(_producto);
+        await Navigation.PopModalAsync();*/
     }
 
     private async void OnClickEditar(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new NuevoProductoPage()
+        await Navigation.PushModalAsync(new NuevoProductoPage(_APIService)
         {
             BindingContext = _producto,
         });
